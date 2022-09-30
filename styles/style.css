@@ -37,7 +37,7 @@ main {
   border: 0.5rem solid black;
   border-radius: 3rem;
   height: 50rem;
-  min-width: 50rem;
+  width: 30rem;
   padding: 2rem;
 }
 
@@ -68,14 +68,13 @@ main {
   display: flex;
   align-items: center;
   padding: 0.5rem 1rem;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 [type="button"] {
   font-size: 3rem;
   font-family: inherit;
-  padding: 1rem 3rem;
-  margin-right: 2rem;
+  padding: 1rem 1.8rem;
   border-radius: 5px;
 }
 .button-clear {
