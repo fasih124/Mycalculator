@@ -123,13 +123,96 @@ buttons.forEach((button) => {
   });
 });
 
+window.addEventListener("keydown", (e) => {
+  console.log(e.key);
+  switch (e.key) {
+    case "0":
+    case "1":
+    case "2":
+    case "3":
+    case "4":
+    case "5":
+    case "6":
+    case "7":
+    case "8":
+    case "9":
+    case "+":
+    case "-":
+    case "*":
+    case "/":
+    case "=":
+    case "Enter":
+      if (e.key === "+") {
+        data.push(Number(value.join("")));
+        value = [];
+        operators.push("+");
+        decimal.disabled = false;
+      } else if (e.key === "=" || e.key === "Enter") {
+        data.push(Number(value.join("")));
+        let datalength = data.length - 1;
+        if (
+          operators.length !== datalength ||
+          operators.length == 0 ||
+          datalength === 0
+        ) {
+          alert("Syntax Error");
+          resetvalue();
+        } else if (operators.length === datalength) {
+          for (let i = 0; data.length !== 1; i++) {
+            ans = operate(operators[0], data[0], data[1]);
+            operators.shift();
+            data.shift();
+            data.shift();
+            data.unshift(ans);
+          }
+        }
+      } else if (e.key === "/") {
+        data.push(Number(value.join("")));
+        value = [];
+        operators.push("/");
+      } else if (e.key === "-") {
+        data.push(Number(value.join("")));
+        value = [];
+        operators.push("-");
+      } else if (e.key === "*") {
+        data.push(Number(value.join("")));
+        value = [];
+        operators.push("*");
+      } else {
+        value.push(`${e.key}`);
+      }
+      // making value not to overflow  data remian till maxlenght=16;
+      if (value.length <= maxlength) {
+        screen.textContent = value.join("");
+      } else {
+        screen.textContent = value.slice(value.length - maxlength).join("");
+      }
+      // display ans
+      if (e.key === "=" || e.key === "Enter") {
+        value = [ans];
+        screen.textContent = data.join("");
+        data = [];
+      }
+      break;
+    case "Backspace":
+      value.pop();
+      screen.textContent = value.join("");
+      break;
+    case "Escape":
+      resetvalue();
+      break;
+    default:
+      break;
+  }
+});
+
 // clear data
 clearScreen.addEventListener("click", resetvalue);
 
 //remove item
 remove.addEventListener("click", () => {
   value.pop();
-  screen.textContent = value;
+  screen.textContent = value.join("");
 });
 
 decimal.addEventListener("click", () => {
