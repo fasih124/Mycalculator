@@ -10,7 +10,7 @@ let screen = document.querySelector(".result");
 const buttons = document.querySelectorAll(".button");
 const remove = document.querySelector(".button-remove");
 const clearScreen = document.querySelector(".button-clear");
-
+const decimal = document.querySelector(".decimal");
 // functions
 
 function resetvalue() {
@@ -69,9 +69,8 @@ buttons.forEach((button) => {
       data.push(Number(value.join("")));
       value = [];
       operators.push("+");
+      decimal.disabled = false;
     } else if (button.textContent === "=") {
-      //
-      console.log("you press equal");
       data.push(Number(value.join("")));
       let datalength = data.length - 1;
       if (
@@ -90,19 +89,22 @@ buttons.forEach((button) => {
           data.unshift(ans);
         }
       }
-      //
+      decimal.disabled = false;
     } else if (button.textContent === "/") {
       data.push(Number(value.join("")));
       value = [];
       operators.push("/");
+      decimal.disabled = false;
     } else if (button.textContent === "-") {
       data.push(Number(value.join("")));
       value = [];
       operators.push("-");
+      decimal.disabled = false;
     } else if (button.textContent === "*") {
       data.push(Number(value.join("")));
       value = [];
       operators.push("*");
+      decimal.disabled = false;
     } else {
       value.push(`${button.textContent}`);
     }
@@ -128,4 +130,10 @@ clearScreen.addEventListener("click", resetvalue);
 remove.addEventListener("click", () => {
   value.pop();
   screen.textContent = value;
+});
+
+decimal.addEventListener("click", () => {
+  value.push(`${decimal.textContent}`);
+  screen.textContent = value.join("");
+  decimal.disabled = true;
 });

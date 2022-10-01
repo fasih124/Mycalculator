@@ -84,7 +84,8 @@ main {
   padding: 1rem 1.8rem;
   border-radius: 5px;
 }
-.button {
+.button,
+.decimal {
   background-color: #a6eef5;
 }
 
